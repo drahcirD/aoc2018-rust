@@ -32,7 +32,7 @@ pub fn part_two(input: &str) -> String {
     let (a,b) = input
         .lines()
         .tuple_combinations()
-        .filter(|(a, b)| diff_is_one(&a, &b))
+        .filter(|(a, b)| diff_is_one(a, b))
         .exactly_one()
         .unwrap();
     

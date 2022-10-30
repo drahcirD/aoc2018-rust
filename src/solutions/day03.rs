@@ -1,3 +1,4 @@
+use itertools::Itertools;
 use lazy_static::lazy_static;
 use std::collections::{HashMap, HashSet};
 use std::i32;
@@ -19,7 +20,7 @@ impl FromStr for Claim {
         lazy_static! {
             static ref RE: Regex = Regex::new(r"^#(?P<id>[0-9]+)\s@\s(?P<x>[0-9]+),(?P<y>[0-9]+):\s(?P<width>[0-9]+)x(?P<height>[0-9]+)").unwrap();
         }
-        let cap = match RE.captures(&input) {
+        let cap = match RE.captures(input) {
             Some(data) => data,
             None => panic!("Regex capture problem"),
         };
@@ -60,7 +61,7 @@ pub fn part_two(input: &str) -> i16 {
             }
         }
     }
-    ids.iter().next().unwrap().clone()
+    *ids.iter().exactly_one().unwrap()
 }
 
 #[cfg(test)]
