@@ -1,7 +1,6 @@
 use crate::solutions::*;
 use rust::read_file;
 use std::env;
-use std::fmt::Display;
 use std::time::Instant;
 
 mod solutions;
@@ -10,12 +9,12 @@ static ANSI_ITALIC: &str = "\x1b[3m";
 static ANSI_BOLD: &str = "\x1b[1m";
 static ANSI_RESET: &str = "\x1b[0m";
 
-fn print_result<T: Display>(func: impl FnOnce(&str) -> T, input: &str) {
+fn print_result<T: std::fmt::Debug>(func: impl FnOnce(&str) -> T, input: &str) {
     let timer = Instant::now();
     let result = func(input);
     let time = timer.elapsed();
     println!(
-        "{} {}(elapsed: {:.2?}){}",
+        "{:?} {}(elapsed: {:.2?}){}",
         result, ANSI_ITALIC, time, ANSI_RESET
     );
 }
@@ -46,6 +45,7 @@ fn main() {
         1 => solve_day!(day01, &input),
         2 => solve_day!(day02, &input),
         3 => solve_day!(day03, &input),
+        4 => solve_day!(day04, &input),
         _ => println!("day not solved: {}", day),
     }
 }
